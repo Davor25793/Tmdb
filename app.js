@@ -36,7 +36,7 @@ function showMovies(data){
         <h3>${movie.title}</h3>
         <p>${movie.vote_average}</p>
       </div>
-      <a href="#" data-id=${movie.id}  class="btn">Show more</a>
+      <a href="" data-id=${movie.id}  class="btn">Show more</a>
     </div>
     `
     moviesContainer.innerHTML = output;
@@ -48,8 +48,19 @@ function getButtons(){
   
   buttons.forEach(button => {
     button.addEventListener('click', (e) => {
+      e.preventDefault()
       const id = button.dataset.id;
-      console.log(id)
+      // console.log(id)
+
+      async function getSingleMovie(id){
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US`)
+        const data = await response.json();
+        return data;
+      }
+
+      getSingleMovie(id)
+        .then(data => console.log(data));
+
     })
   })
 }
