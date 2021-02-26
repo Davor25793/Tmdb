@@ -1,60 +1,61 @@
 const APIURL = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=dd132df044d85760fdd79f3192642f6a'
 
 const IMGPATH = 'https://image.tmdb.org/t/p/w1280'
-const SEARCHAPI = 'https://api.themoviedb.org/3/search/movie?api_key=dd132df044d85760fdd79f3192642f6a&query='
+const DETAILS = 'https://api.themoviedb.org/3/movie/3?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US'
+const CAST = 'https://api.themoviedb.org/3/movie/3/credits?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US'
 
-const moviesContainer = document.querySelector('.movies-container');
+const moviesContainer = document.querySelector('.movies-container')
 
-
-const search = document.querySelector('#search')
 
 async function getMovies(url){
-  const response = await fetch(url)
+  const response = await fetch(url);
   const data = await response.json();
+  return data;
+}
+
+getMovies(APIURL)
+  .then(data => {
+    showMovies(data)
+    getButtons()
+  })
+  .catch(err => console.log(err))
+
+
+
+
+//SHOW MOVIES
+function showMovies(data){
+  let output = '';
   console.log(data)
 
-  showMovies(data.results);
-
-} 
-
-getMovies(APIURL);
-
-
-function showMovies(movies){
-
-  moviesContainer.innerHTML = ''
-
-  movies.forEach(movie => {
-
-
-    const {poster_path, title, vote_average} = movie;
-
-    const movieEl = document.createElement('div');
-    movieEl.classList.add('movie')
-    movieEl.innerHTML = `
-    <img src="${IMGPATH + poster_path}">
-    <div class="movie-info">
-     <h3>${title}</h3>
-     <span>${vote_average}</span>
+  data.results.forEach(movie => {
+    output += `
+    <div class="movie" data-id={movie.id}>
+      <img src=${IMGPATH + movie.poster_path} alt="">
+      <div class="movie-content">
+        <h3>${movie.title}</h3>
+        <p>${movie.vote_average}</p>
+      </div>
+      <a href="#" class="btn">Show more</a>
     </div>
     `
-
-
-   moviesContainer.appendChild(movieEl)
-
+    moviesContainer.innerHTML = output;
   })
 }
 
-const form = document.querySelector('#form');
+function getButtons(){
+  const buttons = [...document.querySelectorAll('.btn')]
+  
+  buttons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('clicked')
+    })
+  })
+}
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
 
- const searchTerm = search.value;
 
-  if(searchTerm){
-    getMovies(SEARCHAPI + searchTerm)
-    search.value = ''
-  }
-})
+
+
 
