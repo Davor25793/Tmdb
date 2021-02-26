@@ -23,8 +23,6 @@ getMovies(APIURL)
   .catch(err => console.log(err))
 
 
-
-
 //SHOW MOVIES
 function showMovies(data){
   moviesContainer.innerHTML = '' 
@@ -75,16 +73,24 @@ function getButtons(){
 async function displayCast(id){
   const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US`)
   const result = await response.json();
-  const cast = result.cast;
+  const cast = result.cast.slice(0, 5);
   console.log(cast)
 
   let output = ''
 
   cast.map(cast => {
     output += `
-    <img src=${IMGPATH + cast.profile_path} alt="">
-    <h3>${cast.character}</h3>
-    <h3>${cast.name}</h3>
+    <div class="cast-container">
+      <div class="cast-item">
+        <div>
+          <img src=${IMGPATH + cast.profile_path} alt="">
+        </div>
+        <div>
+          <h3>Character: ${cast.character}</h3>
+          <h3>Actor: ${cast.name}</h3>
+        </div>
+      </div>
+    </div>
     `
   })
   casts.innerHTML = output;
@@ -104,6 +110,7 @@ function displaySingleMovie(data){
     <div class="content">
       <h2>Summary</h2>
       <p>${overview}</p>
+      <h2>CAST</h2>
     </div>
   `
  singleMovie.innerHTML = output;

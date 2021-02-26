@@ -5,9 +5,9 @@
   font-family: 'Quicksand', sans-serif;
 }
 
-body{
+/* body{
   background: rgb(187, 178, 196);
-}
+} */
 
 .navbar{
  background: rgb(31, 5, 61);
@@ -107,6 +107,13 @@ body{
 }
 
 /*CASTS*/
-.cast img{
-  width: 100px;
+.cast{
+  display: flex;
+  padding: 0 2rem;
+  justify-content: space-between;
+}
+
+
+.cast-container img{
+  width: 250px;
 }
