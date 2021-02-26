@@ -36,7 +36,7 @@ function showMovies(data){
         <h3>${movie.title}</h3>
         <p>${movie.vote_average}</p>
       </div>
-      <a href="" data-id=${movie.id}  class="btn">Show more</a>
+      <a href="#" data-id=${movie.id}  class="btn">Show more</a>
     </div>
     `
     moviesContainer.innerHTML = output;
@@ -59,8 +59,8 @@ function getButtons(){
       }
 
       getSingleMovie(id)
-        .then(data => console.log(data));
-
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
     })
   })
 }
