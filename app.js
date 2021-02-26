@@ -30,13 +30,13 @@ function showMovies(data){
 
   data.results.forEach(movie => {
     output += `
-    <div class="movie" data-id={movie.id}>
+    <div class="movie">
       <img src=${IMGPATH + movie.poster_path} alt="">
       <div class="movie-content">
         <h3>${movie.title}</h3>
         <p>${movie.vote_average}</p>
       </div>
-      <a href="#" class="btn">Show more</a>
+      <a href="#" data-id=${movie.id}  class="btn">Show more</a>
     </div>
     `
     moviesContainer.innerHTML = output;
@@ -48,8 +48,8 @@ function getButtons(){
   
   buttons.forEach(button => {
     button.addEventListener('click', (e) => {
-      e.preventDefault();
-      console.log('clicked')
+      const id = button.dataset.id;
+      console.log(id)
     })
   })
 }
