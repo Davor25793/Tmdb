@@ -66,14 +66,19 @@ function getButtons(){
         const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US`)
         const data = await response.json();
         const video = data.results[0];
-        console.log(video)
+        // console.log(video)
 
         const key = video.key;
+
+        const heading = document.createElement('h2')
+        heading.textContent = 'TRAILER'
+        heading.className = 'trailer-heading'
         
         const output = createIframe(key)
-        console.log(output);
+        // console.log(output);
+        trailer.appendChild(heading);
         trailer.appendChild(output);
-
+        
       }
 
       getSingleMovie(id)
@@ -138,8 +143,8 @@ function displaySingleMovie(data){
 function createIframe(key){
   const iframe = document.createElement('iframe');
   iframe.src = `https://www.youtube.com/embed/${key}`;
-  iframe.width = 1000;
-  iframe.height = 400;
+  // iframe.width = 1000;
+  // iframe.height = 400;
   iframe.allowFullscreen = true;
 
   return iframe
