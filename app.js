@@ -15,6 +15,7 @@ const singleMovieContainer = document.querySelector('.single-movie-container');
 const form = document.querySelector('#form');
 const input = document.querySelector('#search');
 
+
 singleMovieContainer.style.display = 'none'
 
 // singleMovieContainer.innerHTML = ''
@@ -92,6 +93,7 @@ function getButtons(){
       getSingleMovie(id)
         .then(data => {
           displaySingleMovie(data)
+          getBackBtn()
           displayCast(id)
           getVideo(id)
         })
@@ -99,6 +101,15 @@ function getButtons(){
     })
   })
 }
+
+//GET BACK BTN
+function getBackBtn(){
+  const btn = document.querySelector('.backBtn')
+  btn.addEventListener('click', () => {
+    window.location.reload()
+  })
+}
+
 
 //DISPLAY CAST
 async function displayCast(id){
@@ -130,6 +141,8 @@ async function displayCast(id){
 
 //Display single movie 
 function displaySingleMovie(data){
+  const navbar = document.querySelector('.navbar');
+  navbar.style.display = 'none';
   // console.log(data)
   const{overview, backdrop_path} = data;
 
@@ -137,9 +150,12 @@ function displaySingleMovie(data){
 
   let output = `
     <img src=${IMGPATH + backdrop_path} alt="">
+    <span class="backBtn">
+      <i class="fas fa-angle-left fa-2x"></i>
+    </span>
     <div class="content">
       <h2 class="summary">Summary</h2>
-      <p>${overview}</p>
+      <p class="overview">${overview}</p>
       <h2 class="cast-heading">CAST</h2>
     </div>
   `
@@ -179,7 +195,10 @@ form.addEventListener('submit', (e) => {
       input.value = '';
     });
 })
+
+
  
+
 
 
 
