@@ -37,7 +37,7 @@ getMovies(APIURL)
 function showMovies(data){
   moviesContainer.innerHTML = '' 
   let output = '';
-  console.log(data)
+  // console.log(data)
 
   data.results.forEach(movie => {
     output += `
@@ -68,6 +68,7 @@ function getButtons(){
         const data = await response.json();
         return data;
       }
+
 
       async function getVideo(id){
         const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US`)
@@ -129,7 +130,7 @@ async function displayCast(id){
 
 //Display single movie 
 function displaySingleMovie(data){
-  console.log(data)
+  // console.log(data)
   const{overview, backdrop_path} = data;
 
   moviesContainer.innerHTML = '';
@@ -154,9 +155,16 @@ function createIframe(key){
   // iframe.width = 1000;
   // iframe.height = 400;
   iframe.allowFullscreen = true;
-
   return iframe
 }
+
+//SEARCH SINGLE MOVIE
+async function searchMovie(url){
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+
 
 //SEARCH MOVIE
 form.addEventListener('submit', (e) => {
@@ -167,17 +175,12 @@ form.addEventListener('submit', (e) => {
   searchMovie(SEARCHMOVIE + searchTerm)
     .then(data => {
       showMovies(data)
+      getButtons()
       input.value = '';
     });
-
 })
+ 
 
-//SEARCH SINGLE MOVIE
-async function searchMovie(url){
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
-}
 
 
 
