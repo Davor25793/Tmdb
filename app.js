@@ -3,10 +3,13 @@ const APIURL = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.d
 const IMGPATH = 'https://image.tmdb.org/t/p/w1280'
 const DETAILS = 'https://api.themoviedb.org/3/movie/3?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US'
 const CAST = 'https://api.themoviedb.org/3/movie/3/credits?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US'
+const VIDEO = 'https://api.themoviedb.org/3/movie/3/videos?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US'
+const LINK = 'https://www.youtube.com/watch?v='
 
 const moviesContainer = document.querySelector('.movies-container')
 const singleMovie = document.querySelector('.single-movie')
 const casts = document.querySelector('.cast');
+const trailer = document.querySelector('.trailer')
 
 
 async function getMovies(url){
@@ -59,10 +62,25 @@ function getButtons(){
         return data;
       }
 
+      async function getVideo(id){
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US`)
+        const data = await response.json();
+        const video = data.results[0];
+        console.log(video)
+
+        const key = video.key;
+        
+        const output = createIframe(key)
+        console.log(output);
+        trailer.appendChild(output);
+
+      }
+
       getSingleMovie(id)
         .then(data => {
           displaySingleMovie(data)
           displayCast(id)
+          getVideo(id)
         })
         .catch(err => console.log(err))
     })
@@ -74,7 +92,6 @@ async function displayCast(id){
   const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US`)
   const result = await response.json();
   const cast = result.cast.slice(0, 5);
-  console.log(cast)
 
   let output = ''
 
@@ -116,6 +133,17 @@ function displaySingleMovie(data){
  singleMovie.innerHTML = output;
 }
 
+
+//I FRAME FUNCTION
+function createIframe(key){
+  const iframe = document.createElement('iframe');
+  iframe.src = `https://www.youtube.com/embed/${key}`;
+  iframe.width = 1000;
+  iframe.height = 400;
+  iframe.allowFullscreen = true;
+
+  return iframe
+}
 
 
 
