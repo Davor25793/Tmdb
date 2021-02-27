@@ -16,6 +16,7 @@ const form = document.querySelector('#form');
 const input = document.querySelector('#search');
 
 
+
 singleMovieContainer.style.display = 'none'
 
 // singleMovieContainer.innerHTML = ''
@@ -38,7 +39,6 @@ getMovies(APIURL)
 function showMovies(data){
   moviesContainer.innerHTML = '' 
   let output = '';
-  // console.log(data)
 
   data.results.forEach(movie => {
     output += `
@@ -186,15 +186,29 @@ async function searchMovie(url){
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
+
   const searchTerm = input.value;
   
   searchMovie(SEARCHMOVIE + searchTerm)
     .then(data => {
       showMovies(data)
       getButtons()
+      setRule(data)
       input.value = '';
     });
 })
+
+
+//FUNCTION SET RULE
+function setRule(data){
+
+  const items = data.results;
+  
+  const da = items.filter(item => item.poster_path !== null)
+  return da;
+}
+
+
 
 
  
