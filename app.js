@@ -85,9 +85,9 @@ async function displayCast(id){
         <div>
           <img src=${IMGPATH + cast.profile_path} alt="">
         </div>
-        <div>
-          <h3>Character: ${cast.character}</h3>
-          <h3>Actor: ${cast.name}</h3>
+        <div class="names">
+          <h4 class="character">Character: ${cast.character}</h4>
+          <h3 class="actor">Actor: ${cast.name}</h3>
         </div>
       </div>
     </div>
@@ -108,9 +108,9 @@ function displaySingleMovie(data){
   let output = `
     <img src=${IMGPATH + backdrop_path} alt="">
     <div class="content">
-      <h2>Summary</h2>
+      <h2 class="summary">Summary</h2>
       <p>${overview}</p>
-      <h2>CAST</h2>
+      <h2 class="cast-heading">CAST</h2>
     </div>
   `
  singleMovie.innerHTML = output;
