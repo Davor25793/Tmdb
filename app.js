@@ -5,13 +5,20 @@ const DETAILS = 'https://api.themoviedb.org/3/movie/3?api_key=dd132df044d85760fd
 const CAST = 'https://api.themoviedb.org/3/movie/3/credits?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US'
 const VIDEO = 'https://api.themoviedb.org/3/movie/3/videos?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US'
 const LINK = 'https://www.youtube.com/watch?v='
+const SEARCHMOVIE = 'https://api.themoviedb.org/3/search/movie?api_key=dd132df044d85760fdd79f3192642f6a&query='
 
-const moviesContainer = document.querySelector('.movies-container')
-const singleMovie = document.querySelector('.single-movie')
+const moviesContainer = document.querySelector('.movies-container');
+const singleMovie = document.querySelector('.single-movie');
 const casts = document.querySelector('.cast');
-const trailer = document.querySelector('.trailer')
+const trailer = document.querySelector('.trailer');
+const singleMovieContainer = document.querySelector('.single-movie-container');
+const form = document.querySelector('#form');
+const input = document.querySelector('#search');
 
+singleMovieContainer.style.display = 'none'
 
+// singleMovieContainer.innerHTML = ''
+ 
 async function getMovies(url){
   const response = await fetch(url);
   const data = await response.json();
@@ -136,6 +143,7 @@ function displaySingleMovie(data){
     </div>
   `
  singleMovie.innerHTML = output;
+ singleMovieContainer.style.display = 'block';
 }
 
 
@@ -150,6 +158,26 @@ function createIframe(key){
   return iframe
 }
 
+//SEARCH MOVIE
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const searchTerm = input.value;
+  
+  searchMovie(SEARCHMOVIE + searchTerm)
+    .then(data => {
+      showMovies(data)
+      input.value = '';
+    });
+
+})
+
+//SEARCH SINGLE MOVIE
+async function searchMovie(url){
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
 
 
 
