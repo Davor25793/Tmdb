@@ -190,20 +190,41 @@ form.addEventListener('submit', (e) => {
   // trailer.innerHTML = ''
 
   const searchTerm = input.value;
-  
-  searchMovie(SEARCHMOVIE + searchTerm)
+
+  if(searchTerm === ''){
+    alert('Please, fill in this field!')
+  }else{
+    searchMovie(SEARCHMOVIE + searchTerm)
     .then(data => {
       showMovies(data)
       setRule(data)
       getButtons()
       input.value = '';
+      showMessage(data)
     });
+  }
 })
+
+//SHOW MESSAGE
+function showMessage(data){
+  const items = data.results;
+  
+  let msg = document.createElement('p');
+  msg.textContent = 'Movie has not been found!'
+  msg.className = 'msg'
+
+  console.log(msg)
+  
+  if(items.length === 0){
+    console.log('TRUE')
+    moviesContainer.appendChild(msg)
+  }
+}
+
 
 
 //FUNCTION SET RULE
 function setRule(data){
-
 
   const items = data.results;
   // console.log(items);
@@ -223,8 +244,11 @@ function setRule(data){
     </div>
     `
     moviesContainer.innerHTML = output;
-  }) 
+  })
 }
+
+
+
 
 
 
