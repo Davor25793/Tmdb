@@ -192,7 +192,7 @@ form.addEventListener('submit', (e) => {
   const searchTerm = input.value;
 
   if(searchTerm === ''){
-    alert('Please, fill in this field!')
+    alert('Please fill this field ')
   }else{
     searchMovie(SEARCHMOVIE + searchTerm)
     .then(data => {
@@ -213,10 +213,8 @@ function showMessage(data){
   msg.textContent = 'Movie has not been found!'
   msg.className = 'msg'
 
-  console.log(msg)
   
   if(items.length === 0){
-    console.log('TRUE')
     moviesContainer.appendChild(msg)
   }
 }
