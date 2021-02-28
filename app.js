@@ -201,12 +201,30 @@ form.addEventListener('submit', (e) => {
 
 //FUNCTION SET RULE
 function setRule(data){
-
   const items = data.results;
-  
+  console.log(items);
   const da = items.filter(item => item.poster_path !== null)
-  return da;
+
+    let output = ''
+    
+    da.map(item => {
+    output += `
+    <div class="movie">
+      <img src=${IMGPATH + item.poster_path} alt="">
+      <div class="item-content">
+        <h3>${item.title}</h3>
+        <p>${item.vote_average}</p>
+      </div>
+      <a href="#" data-id=${item.id}  class="btn">Show more</a>
+    </div>
+    `
+    moviesContainer.innerHTML = output;
+  })
 }
+
+
+
+
 
 
 
