@@ -220,7 +220,6 @@ function showMessage(data){
 }
 
 
-
 //FUNCTION SET RULE
 function setRule(data){
 

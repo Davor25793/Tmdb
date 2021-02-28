@@ -192,5 +192,51 @@
   font-weight: 700;
 }
 
+/*QUERIES*/
+@media(max-width: 1200px){
+  .cast{
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cast-item{
+    width: 400px;
+  }
+
+  .cast-item div{
+    width: 100%;
+  }
+
+  .cast-item img{
+    width: 100%;
+  }
+}
+
+
+@media(max-width:500px){
+
+  .single-movie img{
+    height: 100%;
+  }
+
+  .overview{
+    font-size: .9rem;
+    padding: 0 1rem;
+  }
+
+  .logo{
+    width: 70px;
+  }
+
+  .cast-item{
+    width: 250px;
+  }
+
+  .trailer{
+    padding: 2rem 0 ;
+  }
+
+}
+
 
 
