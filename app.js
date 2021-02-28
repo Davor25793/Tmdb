@@ -186,14 +186,15 @@ async function searchMovie(url){
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
+  // trailer.innerHTML = ''
 
   const searchTerm = input.value;
   
   searchMovie(SEARCHMOVIE + searchTerm)
     .then(data => {
       showMovies(data)
-      getButtons()
       setRule(data)
+      getButtons()
       input.value = '';
     });
 })
@@ -206,20 +207,20 @@ function setRule(data){
   const da = items.filter(item => item.poster_path !== null)
 
     let output = ''
-    
+
     da.map(item => {
     output += `
     <div class="movie">
       <img src=${IMGPATH + item.poster_path} alt="">
-      <div class="item-content">
-        <h3>${item.title}</h3>
-        <p>${item.vote_average}</p>
+      <div class="item-content add">
+        <h3 class="form-title">${item.title}</h3>
+        <p class="form-average">${item.vote_average}</p>
       </div>
       <a href="#" data-id=${item.id}  class="btn">Show more</a>
     </div>
     `
     moviesContainer.innerHTML = output;
-  })
+  }) 
 }
 
 
