@@ -12,6 +12,7 @@
 .navbar{
  background: rgb(31, 5, 61);
  padding: 1rem;
+ margin-bottom: 3rem;
 }
 
 .navbar-container{
@@ -116,6 +117,10 @@
   justify-content: space-around;
   align-items: center;
  
+}
+
+.cast-item{
+  width: 230px;
 }
 
 .names{

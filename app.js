@@ -116,6 +116,7 @@ async function displayCast(id){
   const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=dd132df044d85760fdd79f3192642f6a&language=en-US`)
   const result = await response.json();
   const cast = result.cast.slice(0, 5);
+  console.log(cast);  
 
   let output = ''
 
@@ -127,7 +128,7 @@ async function displayCast(id){
           <img src=${IMGPATH + cast.profile_path} alt="">
         </div>
         <div class="names">
-          <h4 class="character">Character: ${cast.character}</h4>
+          <h4 class="character">${cast.character}</h4>
           <h3 class="actor">Actor: ${cast.name}</h3>
         </div>
       </div>
@@ -202,8 +203,10 @@ form.addEventListener('submit', (e) => {
 
 //FUNCTION SET RULE
 function setRule(data){
+
+
   const items = data.results;
-  console.log(items);
+  // console.log(items);
   const da = items.filter(item => item.poster_path !== null)
 
     let output = ''
@@ -222,6 +225,7 @@ function setRule(data){
     moviesContainer.innerHTML = output;
   }) 
 }
+
 
 
 
