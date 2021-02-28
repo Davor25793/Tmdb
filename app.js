@@ -192,7 +192,8 @@ form.addEventListener('submit', (e) => {
   const searchTerm = input.value;
 
   if(searchTerm === ''){
-    alert('Please fill this field ')
+    // alert('Please fill this field ')
+    showAlert()
   }else{
     searchMovie(SEARCHMOVIE + searchTerm)
     .then(data => {
@@ -204,6 +205,24 @@ form.addEventListener('submit', (e) => {
     });
   }
 })
+
+//SHOW ALERT
+function showAlert(){
+  const div = document.createElement('div');
+  div.className = 'alert'
+  div.appendChild(document.createTextNode('Please enter a movie !'))
+
+  const parent = document.querySelector('.movies')
+  parent.insertAdjacentElement('beforebegin',div)
+
+   setTimeout(() => {
+    if(div.className === 'alert'){
+      div.remove()
+    }
+  }, 2000)
+
+}
+
 
 //SHOW MESSAGE
 function showMessage(data){

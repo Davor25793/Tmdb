@@ -192,6 +192,12 @@
   font-weight: 700;
 }
 
+.alert{
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
 /*QUERIES*/
 @media(max-width: 1200px){
   .cast{
